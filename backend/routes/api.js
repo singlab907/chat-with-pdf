@@ -8,6 +8,11 @@ const { parseFile } = require('../utils/fileParser');
 // Router responsible for serving backend API endpoints
 const router = Router();
 
+// Health check at /api/healthz
+router.get('/healthz', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 const GEMINI_MODEL =
   process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
