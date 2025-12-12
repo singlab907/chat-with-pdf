@@ -9,7 +9,7 @@ const { parseFile } = require('../utils/fileParser');
 const router = Router();
 
 const GEMINI_MODEL =
-  process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 router.post('/files/parse', async (req, res) => {
   const { fileName, fileContent } = req.body || {};

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { clearMessages, loadMessages, saveMessages } from '../utils/localStorage.js';
 import { extractInlineCitations } from '../utils/citationUtils.js';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api`;
 
 // Centralized chat store responsible for persisting messages and talking to the backend
 export const ChatContext = createContext({
