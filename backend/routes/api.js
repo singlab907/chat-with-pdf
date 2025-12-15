@@ -18,6 +18,7 @@ const GEMINI_MODEL =
 
 router.post('/files/parse', async (req, res) => {
   const { fileName, fileContent } = req.body || {};
+  console.log('[files/parse] Incoming request', { fileName });
 
   if (!fileName || !fileContent) {
     return res.status(400).json({ message: 'fileName and fileContent are required' });
@@ -35,7 +36,7 @@ router.post('/files/parse', async (req, res) => {
 
     return res.json({ fileText: extractedText });
   } catch (error) {
-    console.error('[files/parse] Failed to parse file', error);
+    console.error('[files/parse] Failed to parse file', { fileName, error: error.message });
     return res.status(500).json({ message: 'Failed to parse file' });
   } finally {
     if (tempDir) {
@@ -46,6 +47,11 @@ router.post('/files/parse', async (req, res) => {
 
 router.post('/chat', async (req, res) => {
   const { fileName, fileContent, prompt, conversationHistory = [] } = req.body || {};
+  console.log('[chat] Incoming chat request', {
+    fileName,
+    promptPreview: prompt?.slice(0, 60),
+    historyLength: conversationHistory.length,
+  });
 
   if (!prompt || !prompt.trim()) {
     return res.status(400).json({ message: 'Prompt is required' });
@@ -88,7 +94,11 @@ router.post('/chat', async (req, res) => {
       citations,
     });
   } catch (error) {
-    console.error('[chat] Gemini API error', error.response?.data || error.message);
+    console.error('[chat] Gemini API error', {
+      fileName,
+      promptPreview: prompt?.slice(0, 60),
+      error: error.response?.data || error.message,
+    });
     return res.status(502).json({
       message: 'Gemini API request failed',
       details: error.response?.data || error.message,

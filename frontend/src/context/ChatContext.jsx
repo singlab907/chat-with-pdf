@@ -3,7 +3,8 @@ import axios from 'axios';
 import { clearMessages, loadMessages, saveMessages } from '../utils/localStorage.js';
 import { extractInlineCitations } from '../utils/citationUtils.js';
 
-const API_BASE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api`;
+const API_ORIGIN = (import.meta.env.VITE_API_URL || 'https://chat-with-pdf-d1bw.onrender.com').replace(/\/$/, '');
+const API_BASE_URL = `${API_ORIGIN}/api`;
 
 // Centralized chat store responsible for persisting messages and talking to the backend
 export const ChatContext = createContext({

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-const API_BASE_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api`;
+const API_ORIGIN = (import.meta.env.VITE_API_URL || 'https://chat-with-pdf-d1bw.onrender.com').replace(/\/$/, '');
+const API_BASE_URL = `${API_ORIGIN}/api`;
 
 // Handles selecting or dragging files and streams them to the backend for parsing
 function FileUpload({ onFileUpload }) {
