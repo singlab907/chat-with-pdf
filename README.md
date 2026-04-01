@@ -198,8 +198,8 @@ Predefined actions:
 
 ### **Deployment**
 
-* Frontend: Vercel (serverless)
-* Backend: API-based / serverless
+* Frontend: Vercel
+* Backend: API-based on Render
 
 ---
 
